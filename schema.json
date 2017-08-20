@@ -79,6 +79,33 @@
     ],
     "functions": [
       {
+        "name": "getDefaultEngine",
+        "type": "function",
+        "async": "callback",
+        "description": "Get default search engine.",
+        "parameters": [
+          {
+            "name": "nofilter",
+            "$ref": "SearchEngineFilter",
+            "optional": true
+          },
+          {
+            "name": "callback",
+            "optional": true,
+            "type": "function",
+            "parameters": [
+              {
+                "name": "results",
+                "type": "object",
+                "items": {
+                  "$ref": "SearchEngine"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "list",
         "type": "function",
         "async": "callback",
@@ -102,25 +129,6 @@
                 }
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "getDefaultEngines",
-        "type": "function",
-        "async": "callback",
-        "description": "Get the default search engines.",
-        "parameters": [
-          {
-            "name": "filter",
-            "$ref": "SearchEngineFilter",
-            "optional": true
-          },
-          {
-            "name": "callback",
-            "optional": true,
-            "type": "function",
-            "parameters": [ ]
           }
         ]
       }

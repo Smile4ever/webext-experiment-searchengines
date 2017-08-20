@@ -34,10 +34,11 @@ for(let engine of engines){
 	console.log(engine.keyword);
 	console.log(engine.description);
 	console.log(engine.searchUrl);
-	//console.log(engine.icon); works, but clutters op console
+	//console.log(engine.icon); works, but clutters up the console
 }
 
 function match(info, search) {
+  if(!search) return true;
   return Object.keys(search).every(field => search[field] == null || search[field] == info[FIELDS[field]]);
 }
 
@@ -46,7 +47,12 @@ class API extends ExtensionAPI {
     // XXX only return this for background contexts?
     return {
       searchengines: {
-        list(filter) {
+        getDefaultEngine(nofilter) {
+		  console.log("browser.searchengines: calling getDefaultEngine method");
+          let searchengine = convert(SearchService.defaultEngine);
+          return Promise.resolve(searchengine);
+		},
+		list(filter) {
 		  console.log("browser.searchengines: calling list method");
           let searchengines = SearchService.getVisibleEngines({})
               .filter(engine => match(engine, filter))
@@ -54,13 +60,6 @@ class API extends ExtensionAPI {
 
           return Promise.resolve(searchengines);
         },
-        getDefaultEngines(filter) {
-		  console.log("browser.searchengines: calling getDefaultEngines method");
-          let searchengines = SearchService.getDefaultEngines() // not sure if this works
-              .map(convert);
-
-          return Promise.resolve(searchengines);
-		},
       },
     };
   }

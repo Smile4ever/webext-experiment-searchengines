@@ -5,19 +5,19 @@ function clickToolbarButton(){
 	console.log(browser.searchengines);
 	
 	// Works, but I would like to have the option to call list without parameter as well
-	browser.searchengines.list({}).then((engines) => {
+	browser.searchengines.list().then((engines) => {
 		console.log(engines);
 		for(let engine of engines){
 			console.log("getting engine from webextension... " + engine.name);
 		}
 	}).catch(console.error);
-	
-	// Doesn't work yet
-	browser.searchengines.getDefaultEngines({}).then((engines) => {
-		console.log(engines);
-		for(let engine of engines){
-			console.log("getting default engine from webextension... " + engine.name);
-		}
+
+	console.log("browser.searchengines.getDefaultEngine is " + browser.searchengines.getDefaultEngine);
+	browser.searchengines.getDefaultEngine({}).then((engine) => {
+		console.log("getting default engine");
+		console.log(engine);
+		console.log(engine.name);
+
 	}).catch(console.error);
 }
 

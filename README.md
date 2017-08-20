@@ -49,4 +49,4 @@ The methods under browser.searchengines are:
 Method Name | Description
 --- | ---
 `list(filter)` | Search for installed search engines. The filter parameter is a javascript object containing any of the properties from a SearchEngineFilter object. This method returns a promise that resolves to an array of SearchEngine objects. Note that if filter is an empty object, then all records will trivially match so all records that match the extension’s host permissions will be returned.<br>Example use (inside an async Task):<br> ```let info = yield browser.searchengines.list({name: “Google”});```
-`getDefaultEngines(filter)` | Search for the default search engine(s). You need to pass an empty object as filter.<br>Example use (inside an async Task):<br> ```let info = yield browser.searchengines.getDefaultEngines({});```
+`getDefaultEngine(filter)` | Search for the default search engine.<br>Example use (inside an async Task):<br> ```let info = yield browser.searchengines.getDefaultEngine();```
