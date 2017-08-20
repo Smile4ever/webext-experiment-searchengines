@@ -1,0 +1,1 @@
+There are no tests yet, this test is an example how to create a future test for browser.searchengines.

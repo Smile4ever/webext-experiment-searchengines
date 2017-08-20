@@ -1,0 +1,129 @@
+[
+  {
+    "namespace": "manifest",
+    "types": [
+      {
+        "$extend": "Permission",
+        "choices": [{
+          "type": "string",
+          "enum": [ "searchengines" ]
+        }]
+      }
+    ]
+  },
+  {
+    "namespace": "searchengines",
+    "description": "List installed search engines",
+    "permissions": ["searchengines"],
+    "types": [
+      {
+        "id": "SearchEngine",
+        "type": "object",
+        "properties": {
+          "name": {
+ 	    "type": "string",
+            "description": "The name of the search engine"
+          },
+          "description": {
+ 	    "type": "string",
+            "description": "The description of the search engine"
+          },
+          "keyword": {
+ 	    "type": "string",
+			"optional": true,
+            "description": "The search keyword used for quick searches in the omnibar"
+          },
+          "searchurl": {
+ 	    "type": "string",
+            "description": "The search URL used to execute search queries"
+          },
+          "icon": {
+ 	    "type": "string",
+            "optional": true,
+            "description": "A base64 icon URI or a URI to an icon file"
+          }
+        }
+      },
+      {
+        "id": "SearchEngineFilter",
+        "type": "object",
+        "description": "Equivalent to SearchEngine but with all properties marked as optional. Instances of this object are passed to the list method.",
+         "properties": {
+          "name": {
+ 	    "type": "string",
+ 	        "optional": true,
+            "description": "The name of the search engine"
+          },
+          "description": {
+ 	    "type": "string",
+ 	        "optional": true,
+            "description": "The description of the search engine"
+          },
+          "keyword": {
+ 	    "type": "string",
+ 	        "optional": true,
+            "description": "The search keyword used for quick searches in the omnibar"
+          },
+          "searchurl": {
+ 	    "type": "string",
+ 	        "optional": true,
+            "description": "The search URL"
+          },
+          "icon": {
+ 	    "type": "string",
+            "optional": true,
+            "description": "Icon in base64 format."
+          }
+        }
+      }
+    ],
+    "functions": [
+      {
+        "name": "list",
+        "type": "function",
+        "async": "callback",
+        "description": "Search for search engines. If filter is empty, return all items.",
+        "parameters": [
+          {
+            "name": "filter",
+            "$ref": "SearchEngineFilter",
+            "optional": true
+          },
+          {
+            "name": "callback",
+            "optional": true,
+            "type": "function",
+            "parameters": [
+              {
+                "name": "results",
+                "type": "array",
+                "items": {
+                  "$ref": "SearchEngine"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "getDefaultEngines",
+        "type": "function",
+        "async": "callback",
+        "description": "Get the default search engines.",
+        "parameters": [
+          {
+            "name": "filter",
+            "$ref": "SearchEngineFilter",
+            "optional": true
+          },
+          {
+            "name": "callback",
+            "optional": true,
+            "type": "function",
+            "parameters": [ ]
+          }
+        ]
+      }
+    ]
+  }
+]
